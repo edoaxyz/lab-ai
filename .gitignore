@@ -1,0 +1,5 @@
+other_docs
+src/assets/*.net
+src/assets/graphs/*.png
+src/assets/plots/*.png
+__pycache__
