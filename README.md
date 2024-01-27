@@ -20,10 +20,11 @@ This project follows [this paper](https://link.springer.com/content/pdf/10.1007/
 
 ### How to run
 
-You might need to install Python 3.8, `pip` and `graphviz`. Then, run the following commands:
+You might need to install Python 3.8, `pip`, `graphviz` and `gzip` for decompressing the bnlearn network. Then, run the following commands:
 
 ```bash
 cd src
+wget -O - https://www.bnlearn.com/bnrepository/insurance/insurance.net.gz  | gzip -d > assets/insurance.net
 pip install -r requirements.txt
 python main_comparison.py
 python min_diff.py

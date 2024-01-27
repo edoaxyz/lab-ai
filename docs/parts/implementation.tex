@@ -1,0 +1,55 @@
+\section{Implementazione}
+
+L'implementazione è stata realizzata in \textit{Python} cercando di utilizzare il meno possibile
+librerie esterne. In particolare le librerie utilizzate sono:
+\begin{itemize}
+      \item \texttt{matplotlib} per la visualizzazione dei grafici delle analisi effettuate;
+      \item \texttt{graphviz} per la visualizzazione delle reti bayesiane risultanti.
+\end{itemize}
+
+Nel modulo \texttt{structure\_learning} è presente il sotto-modulo \texttt{networks} usato per
+gestire le reti bayesiane. In questo sotto-modulo sono presenti le classi:
+\begin{enumerate}
+      \item \texttt{BayesianNode} che rappresenta un nodo della rete bayesiana e quindi una variabile aleatoria,
+            contenendo le informazioni riguardanti le dipendenze condizionali (e quindi sia i padri che i figli di quel nodo),
+            e la profondità del nodo nella rete;
+      \item \texttt{BayesianNetwork} che rappresenta una rete bayesiana insieme ai suoi nodi; da notare sono i metodi
+            \texttt{get\_diff\_deps} e \texttt{count\_diff\_deps}: il primo data una rete bayesiana restituisce per ogni nodo
+            la differenza del numero di figli tra la rete rappresentata dall'istanza della classe e la rete data, restituendo
+            il numero di figli sia aggiunti che rimossi (e quindi dipendenze aggiunte/rimosse); il secondo fa la somma di questi
+            valori fornendo una misura della differenza tra due reti bayesiane, che poi verrà utilizzata nell'analisi del metodo di apprendimento;
+            inoltre il metodo \texttt{draw\_graph} permette di salvare un'immagine della rete bayesiana utilizzando la libreria
+            \texttt{graphviz};
+      \item \texttt{CPTBayesianNode} estensione della classe \texttt{BayesianNode} che aggiunge la tabella delle probabilità
+            condizionali per quel nodo, quindi per ogni possibile combinazione di valori dei padri e della variabile stessa assegna un
+            valore di probabilità;
+      \item \texttt{CPTBayesianNetwork} estensione della classe \texttt{BayesianNetwork} che permette di gestire solo nodi di tipo
+            \texttt{CPTBayesianNode} e aggiunge il metodo \texttt{generate\_random\_sample} che genera un singolo campione casuale
+            della distribuzione rappresentata dalla rete bayesiana utilizzando la libreria \texttt{random}, in maniera tale che ogni
+            campione sia indipendente e identicamente distribuito rispetto agli altri.
+\end{enumerate}
+
+Inoltre nello stesso sotto-modulo viene definita una funzione per generare una
+\texttt{CPTBayesianNetwork} a partire da un file di testo in formato \texttt{.net}.
+
+Proseguendo ad analizzare gli altri elementi del modulo \texttt{structure\_learning} si hanno:
+\begin{enumerate}[resume]
+      \item \texttt{Samples} classe contenitore di un insieme di campioni generati da una rete bayesiana, insieme alla rete
+            che li ha generati;
+      \item \texttt{Heuristic} classe per rappresentare la funzione euristica utilizzata per l'apprendimento della struttura,
+            che d'ora in poi prenderà il nome di \textit{euristica fattoriale}
+            indicata nell'articolo come $g(i, \pi_i)$\footfullcite{HEURISTIC:CH:1992}; l'implementazione proposta prevede il precalcolo
+            di tutti i fattoriali fino a $m + r - 1$ dove $m$ è il numero di campioni generati e $r$ la massima dimensione tra i domini
+            delle variabili aleatorie, e questi valori vengono salvati nelle istanze di tale classe; per convenienza tale classe viene anche
+            usata per contenere un'istanza della classe \texttt{Samples} usata dall'algoritmo di apprendimento;
+      \item \texttt{LogaritmicHeuristic} estensione della classe \texttt{Heuristic} che nell'articolo viene proposta come
+            alternativa per ridurre i tempi di calcolo della funzione euristica: infatti calcola $\log(g(i, \pi_i))$ quindi utilizza
+            somme e sottrazioni al posto di moltiplicazioni e divisioni\footfullcite{LOGHEURISTIC:CH:1992}; rimane comunque il precalcolo dei
+            \textbf{logaritmi} dei fattoriali;
+      \item la funzione \texttt{k2} che implementa l'algoritmo \textit{K2}\footnotemark[3] per l'apprendimento
+            della struttura della rete bayesiana, prendendo come parametri un'ordinamento delle variabili
+            aleatorie, l'euristica da utilizzare contenente anche i campioni generati dalla rete bayesiana, e
+            il numero massimo di genitori per ogni nodo; restituisce sempre un'istanza della classe
+            \texttt{BayesianNetwork} che rappresenta la rete bayesiana contenente le sole dipendenze
+            condizionali.
+\end{enumerate}

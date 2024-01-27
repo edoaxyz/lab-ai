@@ -31,15 +31,14 @@ for r in range(TIME_ROUNDS):
             for limit in LIMITS:
                 try:
                     start = time.time()
-                    n, _ = k2(nodes_order, h, limit)
+                    n = k2(nodes_order, h, limit)
                     end = time.time()
                     if end - start < (times[heuristic][limit][i] or float("inf")):
                         times[heuristic][limit][i] = end - start
 
                     if r == 0:
                         diffs[heuristic][limit][i] = net.count_diff_deps(n)
-                        if i % 2 == 0:
-                            n.draw_graph(f"assets/graphs/k2_{heuristic.__name__}_{limit}_{i}")
+                        n.draw_graph(f"assets/graphs/k2_{heuristic.__name__}_{limit}_{i}")
 
                     print(
                         f"round:{r} with {heuristic.__name__} max parents:{limit} sample:{i} time:{end - start}"
@@ -69,7 +68,7 @@ l1 = plt.legend(
 )
 l2 = plt.legend(
     [lines[i] for i in [0, len(LIMITS)]],
-    ["Factorial Heuristic", "Logaritmic Heuristic"],
+    ["Factorial Heuristic", "Logarithmic Heuristic"],
     loc=4,
 )
 plt.gca().add_artist(l1)
@@ -77,7 +76,7 @@ plt.gca().add_artist(l2)
 plt.xlabel("Samples")
 plt.ylabel("Time (s)")
 plt.title(f"K2 Time Comparison")
-plt.savefig(f"assets/plots/k2_times.png")
+plt.savefig(f"assets/plots/k2_times.png", dpi=300)
 plt.clf()
 
 fig, ax = plt.subplots(

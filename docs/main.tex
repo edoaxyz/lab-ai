@@ -1,0 +1,39 @@
+\documentclass[a4paper, 10pt]{article}
+\usepackage[top=2cm, bottom=2cm, left=2cm, right=2cm]{geometry}
+\usepackage[italian]{babel}
+\usepackage{biblatex}
+\usepackage{graphicx}
+\usepackage{titling}
+\usepackage{enumitem}
+\usepackage{subfig}
+\usepackage[hidelinks]{hyperref}
+\addbibresource{main.bib} 
+\graphicspath{ {./assets/} }
+
+
+\pretitle{\begin{flushleft}\Large\bfseries}
+\posttitle{\end{flushleft}}
+\preauthor{\begin{flushleft}}
+\postauthor{\end{flushleft}}
+\setlength{\parindent}{0pt}
+\setlength{\droptitle}{-20pt}
+\title{Apprendimento di reti bayesiane con distribuzioni note a priori}
+\author{Edoardo Grassi}
+\date{\vspace{-5ex}}
+
+\begin{document}
+\maketitle
+
+L'obiettivo dell'elaborato è quello di cercare di implementare e analizzare la tecnica descritta
+in un articolo\footfullcite{CH:1992} indicato dal professore per l'apprendimento di reti bayesiane.
+Per fare ciò verrà utilizzata una distribuzione nota a priori, scelta tra quelle disponibili nella libreria 
+\href{https://www.bnlearn.com/}{\texttt{bnlearn}}, di media grandezza. In particolare verrà utilizzata la 
+distribuzione \href{https://www.bnlearn.com/bnrepository/discrete-medium.html#insurance}{\texttt{INSURANCE}}.
+
+\input{parts/implementation}
+\input{parts/test1}
+\input{parts/test2}
+\input{parts/test3}
+\input{parts/conclusion}
+
+\end{document}

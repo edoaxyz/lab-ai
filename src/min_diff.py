@@ -20,7 +20,7 @@ for num_sample in num_samples:
     h = LogaritmicHeuristic(sample)
     h.compute_factorials()
     start = time.time()
-    n, _ = k2(nodes_order, h, LIMIT)
+    n = k2(nodes_order, h, LIMIT)
     end = time.time()
     times.append(end - start)
     diffs.append(net.count_diff_deps(n))
@@ -52,9 +52,9 @@ ax2.plot(
 )
 
 
-plt.xlabel("Samples")
 ax.legend()
 ax.set_ylabel("# Additions/Deletions")
 ax2.set_ylabel("Time (s)", color="b")
+ax.set_xlabel("Samples")
 
-plt.savefig(f"assets/plots/graph_min_diff.png")
+plt.savefig(f"assets/plots/graph_min_diff.png", dpi=300)

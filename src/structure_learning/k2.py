@@ -6,7 +6,6 @@ def k2(
     nodes: list[CPTBayesianNode], heuristic: Heuristic, max_parents: int
 ) -> BayesianNetwork:
     new_nodes = {node.name: BayesianNode(node.name, []) for node in nodes}
-    network_score = 0
     for i, node in enumerate(nodes):
         parents = set()
         score = heuristic.score(node, parents)
@@ -28,5 +27,4 @@ def k2(
                 ok_to_proceed = False
         for p in parents:
             new_nodes[node.name].add_parent(new_nodes[p.name])
-        network_score += score
-    return BayesianNetwork(new_nodes.values()), network_score
+    return BayesianNetwork(new_nodes.values())

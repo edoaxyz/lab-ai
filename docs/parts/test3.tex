@@ -1,0 +1,23 @@
+\subsection{Terzo test}
+
+Sulla base dei risultati ottenuti nei test precedenti, si esegue un'ultima analisi per verificare
+quanti campioni siano necessari per ridurre al minimo la discrepanza tra le reti generate e quella
+di partenza, misurando anche il tempo necessario. Per fare ciò si utilizza lo script
+\texttt{min\_diff.py} che genera insiemi di campioni di cardinalità $1000 \cdot 2^x$ con $1 \le x
+    \le 8$ sui quali viene eseguito l'algoritmo di apprendimento tramite l'euristica logaritmica (dato
+che quella fattoriale fallisce dopo 160 campioni).
+
+\subsubsection{Risultati}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{min_diff.png}
+    \caption{relazione tra il numero di archi errati e il numero di campioni; sull'ordinata destra è indicato il tempo di esecuzione}
+    \label{fig:test3}
+\end{figure}
+
+Si può notare che nonostante un numero alto di campioni, la rete generata non risulta identica a
+quella di partenz da cui è stata generata la distribuzione, infatti il numero di dipendenze in
+eccesso raggiunge lo zero, ma il numero di dipendenze in difetto si assesta su un limite asintotico
+di 5. Questo può indicare che l'algoritmo cerca di approssimare la rete ad una rete più generale
+che contiene meno dipendenze condizionali.
