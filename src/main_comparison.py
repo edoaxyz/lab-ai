@@ -37,7 +37,7 @@ for r in range(TIME_ROUNDS):
                         times[heuristic][limit][i] = end - start
 
                     if r == 0:
-                        diffs[heuristic][limit][i] = net.count_diff_deps(n)
+                        diffs[heuristic][limit][i] = net.count_diff_colliders(n)
                         n.draw_graph(f"assets/graphs/k2_{heuristic.__name__}_{limit}_{i}")
 
                     print(

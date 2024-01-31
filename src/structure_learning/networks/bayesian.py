@@ -44,27 +44,20 @@ class BayesianNetwork:
         reversed_links = {v: k for k, v in links.items()}
         return links, reversed_links
 
-    def get_diff_deps(self, net: Self) -> dict[BayesianNode, tuple[int, int]]:
-        links, rev_links = self._get_links(net)
-        return {
-            node: (
-                sum(
-                    1
-                    for child in links[node].childs
-                    if rev_links[child] not in node.childs
-                ),  # added
-                sum(
-                    1 for child in node.childs if links[child] not in links[node].childs
-                ),  # removed
-            )
-            for node in self.nodes.values()
-        }
+    def get_colliders(self) -> set[BayesianNode]:
+        colliders = set()
+        for node in self.nodes.values():
+            if len(node.parents) > 1:
+                colliders.add(node)
+        return colliders
 
-    def count_diff_deps(self, net: Self) -> tuple[int, int]:
-        diffs = self.get_diff_deps(net)
+    def count_diff_colliders(self, net: Self) -> tuple[int, int]:
+        _, rev_links = self._get_links(net)
+        colliders = self.get_colliders()
+        net_colliders = {rev_links[coll] for coll in net.get_colliders()}
         return (
-            sum(added for added, _ in diffs.values()),
-            sum(removed for _, removed in diffs.values()),
+            len(net_colliders - colliders),  # added
+            len(colliders - net_colliders),  # removed
         )
 
     def draw_graph(self, filename: str) -> None:

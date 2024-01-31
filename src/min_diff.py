@@ -23,7 +23,7 @@ for num_sample in num_samples:
     n = k2(nodes_order, h, LIMIT)
     end = time.time()
     times.append(end - start)
-    diffs.append(net.count_diff_deps(n))
+    diffs.append(net.count_diff_colliders(n))
 
     print(f"sample:{len(sample.data)} diff:{diffs[-1]} time:{times[-1]}")
     if diffs[-1][0] == 0 and diffs[-1][1] == 0:
