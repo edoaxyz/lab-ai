@@ -62,8 +62,9 @@ class BayesianNetwork:
 
     def draw_graph(self, filename: str) -> None:
         graph = gv.Digraph()
+        colliders = self.get_colliders()
         for node in self.nodes.values():
-            graph.node(node.name)
+            graph.node(node.name, color="red" if node in colliders else "black")
             for child in node.childs:
                 graph.edge(node.name, child.name)
         graph.render(filename=filename, format="png", cleanup=True)

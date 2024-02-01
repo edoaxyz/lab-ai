@@ -15,7 +15,7 @@ This project follows [this paper](https://link.springer.com/content/pdf/10.1007/
      - `k2.py` K2 algorithm implementation
      - `samples.py` Class for creating and managing samples from a Bayesian network with CPTs
    - `main_comparison.py` Script to compare K2 algorithm with different parameters and sample sizes
-   - `min_diff.py` Script that tries to find the minimum difference between a K2's generated network and the original network from *bnlearn*
+   - `min_diff.py` Script that tries to find the minimum colliders difference between a K2's generated network and the original network from *bnlearn*
  - `docs` contains LaTeX source files for documentation
 
 ### How to run

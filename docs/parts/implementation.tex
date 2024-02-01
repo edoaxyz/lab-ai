@@ -14,10 +14,10 @@ gestire le reti bayesiane. In questo sotto-modulo sono presenti le classi:
             contenendo le informazioni riguardanti le dipendenze condizionali (e quindi sia i padri che i figli di quel nodo),
             e la profondità del nodo nella rete;
       \item \texttt{BayesianNetwork} che rappresenta una rete bayesiana insieme ai suoi nodi; da notare sono i metodi
-            \texttt{get\_diff\_deps} e \texttt{count\_diff\_deps}: il primo data una rete bayesiana restituisce per ogni nodo
-            la differenza del numero di figli tra la rete rappresentata dall'istanza della classe e la rete data, restituendo
-            il numero di figli sia aggiunti che rimossi (e quindi dipendenze aggiunte/rimosse); il secondo fa la somma di questi
-            valori fornendo una misura della differenza tra due reti bayesiane, che poi verrà utilizzata nell'analisi del metodo di apprendimento;
+            \texttt{get\_colliders} e \texttt{count\_diff\_colliders}: il primo restituisce i nodi collider della rete bayesiana; 
+            il secondo, data un'altra rete bayesiana sotto forma di \texttt{BayesianNetwork}, restituisce il numero di collider 
+            in eccesso e in difetto della rete data rispetto a quella su cui è stato chiamato il metodo; questo permette di valutare
+            quanto due reti bayesiane siano simili tra loro, confrontando le loro indipendenze condizionali\footfullcite{VP:1990};
             inoltre il metodo \texttt{draw\_graph} permette di salvare un'immagine della rete bayesiana utilizzando la libreria
             \texttt{graphviz};
       \item \texttt{CPTBayesianNode} estensione della classe \texttt{BayesianNode} che aggiunge la tabella delle probabilità

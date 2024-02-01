@@ -12,12 +12,13 @@ che quella fattoriale fallisce dopo 160 campioni).
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.6\textwidth]{min_diff.png}
-    \caption{relazione tra il numero di archi errati e il numero di campioni; sull'ordinata destra è indicato il tempo di esecuzione}
+    \caption{relazione tra il numero di collider errati e il numero di campioni; sull'ordinata destra è indicato il tempo di esecuzione}
     \label{fig:test3}
 \end{figure}
 
-Si può notare che nonostante un numero alto di campioni, la rete generata non risulta identica a
-quella di partenz da cui è stata generata la distribuzione, infatti il numero di dipendenze in
-eccesso raggiunge lo zero, ma il numero di dipendenze in difetto si assesta su un limite asintotico
-di 5. Questo può indicare che l'algoritmo cerca di approssimare la rete ad una rete più generale
-che contiene meno dipendenze condizionali.
+Si può notare che nonostante un numero esponenziale di campioni, la rete generata non risulta
+identica a quella di partenza da cui è stata generata la distribuzione, infatti il numero di
+collider in eccesso raggiunge lo zero, ma il numero di collider in difetto diminuisce in maniera
+molto lenta. Questo può indicare che l'algoritmo cerca di approssimare la rete ad una rete più
+"\textit{libera}" che contiene meno dipendenze condizionali. Si è preferito fermarsi a 128000
+campioni in quanto oltre tale soglia i tempi di esecuzione diventano superiori ai 5 minuti.

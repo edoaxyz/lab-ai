@@ -109,7 +109,7 @@ for j, heuristic in enumerate([Heuristic, LogaritmicHeuristic]):
         f"{'Logarithmic' if heuristic == LogaritmicHeuristic else 'Factorial'} Heuristic"
     )
     ax[j].set_xlabel("Samples")
-    ax[j].set_ylabel("#")
+    ax[j].set_ylabel("Colliders Added/Deleted")
     ax[j].label_outer()
 
 
@@ -132,5 +132,5 @@ l2 = fig.legend(
 fig.add_artist(l1)
 fig.add_artist(l2)
 
-fig.suptitle(f"Diff Dependencies Comparison")
+fig.suptitle(f"Diff Colliders Comparison")
 fig.savefig(f"assets/plots/diffs_deps.png", bbox_inches="tight", dpi=300)

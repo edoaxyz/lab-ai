@@ -53,7 +53,7 @@ ax2.plot(
 
 
 ax.legend()
-ax.set_ylabel("# Additions/Deletions")
+ax.set_ylabel("Colliders Added/Deleted")
 ax2.set_ylabel("Time (s)", color="b")
 ax.set_xlabel("Samples")
 
